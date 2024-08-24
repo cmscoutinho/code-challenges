@@ -49,14 +49,14 @@ int main(void) {
 			if (occurrence_arr[j] > maior_occ) {
 				maior_occ = occurrence_arr[j];
 				maior_occ_idx = j;
-				empate = 1;
-			} else if (occurrence_arr[j] == maior_occ) {	// se uma tecla tem frequência igual à outra, há empate
 				empate = 0;
+			} else if (occurrence_arr[j] == maior_occ) {	// se uma tecla tem frequência igual à outra, há empate
+				empate = 1;
 			}
 		}
 		
 		/* definição de 'f' dependendo se houve empate ou não */
-		f = (empate) ? maior_occ_idx : maior_nota;
+		f = (!empate) ? maior_occ_idx : maior_nota;
 
 		/* atualização das notas do piano pertencentes ao acorde */			
 		for (j = a; j <= b; j++)
