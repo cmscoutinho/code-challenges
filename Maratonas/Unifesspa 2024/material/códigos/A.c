@@ -1,17 +1,17 @@
 /* A.c */
-/* Acordes intergaláticos */
+/* Acordes intergalÃ¡ticos */
 /* Autor: Claudio Coutinho */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-/* protótipo de funções auxiliares que foram usadas */
+/* protÃ³tipo de funÃ§Ãµes auxiliares que foram usadas */
 void array_fill (int* arr, int value, int size);
 void array_print (int* arr, int size);
 
 int main(void) {
 	
-	/* declaração de variáveis */
+	/* declaraÃ§Ã£o de variÃ¡veis */
 	int N, Q;
 	int a, b;
 	int i, j, f;
@@ -20,61 +20,61 @@ int main(void) {
 	/* leitura inicial (N->qtd de teclas; Q->qtd de acordes) */
 	scanf ("%i %i", &N, &Q);
 	
-	/* alocação dinâmica e inicialização de vetores*/
+	/* alocaÃ§Ã£o dinÃ¢mica e inicializaÃ§Ã£o de vetores*/
 	int* piano = (int*) malloc (N*sizeof(int));
 	array_fill (piano, 1, N);
 	
-	int* occurrence_arr = (int*) malloc (9*sizeof(int));	// vetor para guardar ocorrências de cada nota do acorde
+	int* occurrence_arr = (int*) malloc (9*sizeof(int));	// vetor para guardar ocorrÃªncias de cada nota do acorde
 
-	/* laço principal */	
+	/* laÃ§o principal */	
 	for (i = 0; i < Q; i++) {	
-		array_fill (occurrence_arr, 0, 9);		// zera vetor de ocorrências
-		scanf ("%i %i", &a, &b);				// lê intervalo do acorde (0 <= a < b < N)
+		array_fill (occurrence_arr, 0, 9);		// zera vetor de ocorrÃªncias
+		scanf ("%i %i", &a, &b);				// lÃª intervalo do acorde (0 <= a < b < N)
 		
 		maior_nota = piano[a];					// guarda maior nota, caso haja empate da tecla mais frequente
-		maior_occ = 0;							// tecla de maior frequência por acorde
-		maior_occ_idx = 0;						// índice da tecla de maior frequência
+		maior_occ = 0;							// tecla de maior frequÃªncia por acorde
+		maior_occ_idx = 0;						// Ã­ndice da tecla de maior frequÃªncia
 		
-		/* laço para calcular frequência de cada tecla */
+		/* laÃ§o para calcular frequÃªncia de cada tecla */
 		for (j = a; j <= b; j++) {
-			occurrence_arr[piano[j]]++;			// incrementa a posição da tecla detectada
+			occurrence_arr[piano[j]]++;			// incrementa a posiÃ§Ã£o da tecla detectada
 			if (piano[j] > maior_nota)			// atualiza maior tecla em caso de empate
 				maior_nota = piano[j];
 		}
 		
 		empate = 0;								// indica se houve empate
 		
-		/* laço para definir tecla mais frequente */
+		/* laÃ§o para definir tecla mais frequente */
 		for (j = 0; j < 9; j++) {
 			if (occurrence_arr[j] > maior_occ) {
 				maior_occ = occurrence_arr[j];
 				maior_occ_idx = j;
 				empate = 0;
-			} else if (occurrence_arr[j] == maior_occ) {	// se uma tecla tem frequência igual à outra, há empate
+			} else if (occurrence_arr[j] == maior_occ) {	// se uma tecla tem frequÃªncia igual Ã  outra, hÃ¡ empate
 				empate = 1;
 			}
 		}
 		
-		/* definição de 'f' dependendo se houve empate ou não */
-		f = (!empate) ? maior_occ_idx : maior_nota;
+		/* definiÃ§Ã£o de 'f' dependendo se houve empate ou nÃ£o */
+		f = (empate) ? maior_nota : maior_occ_idx;
 
-		/* atualização das notas do piano pertencentes ao acorde */			
+		/* atualizaÃ§Ã£o das notas do piano pertencentes ao acorde */			
 		for (j = a; j <= b; j++)
 			piano[j] = (piano[j] + f) % 9;
 			
 	}
-	/* fim do laço principal */
+	/* fim do laÃ§o principal */
 	
-	/* exibição final do piano */
+	/* exibiÃ§Ã£o final do piano */
 	for (i = 0; i < N; i++)
 		printf ("%i\n", piano[i]);
 	
-	/* liberação de memória alocada */
+	/* liberaÃ§Ã£o de memÃ³ria alocada */
 	free (piano);
 	free (occurrence_arr);
 }
 
-/* funções auxiliares */
+/* funÃ§Ãµes auxiliares */
 void array_fill (int* arr, int value, int size) {
 	int i;
 	
